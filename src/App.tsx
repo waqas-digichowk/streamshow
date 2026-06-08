@@ -49,43 +49,71 @@ const RtspCanvas: React.FC = () => {
 
 
 function App() {  
-  const [isPlaying, setIsPlaying] = useState(true)
-  const streamUrl = "http://localhost:8000/video_feed"
-
+  
+  
   return (
     <>
-       <div style={{ textAlign: 'center', marginTop: '20px' }}>
-      <h2>Live RTSP Stream via FastAPI</h2>
-      
-      <div style={{ maxWidth: '640px', margin: '0 auto', border: '2px solid #ccc' }}>
-        {isPlaying ? (
-          <img 
-            src={streamUrl} 
-            alt="Live Camera Feed" 
-            style={{ width: '100%', height: 'auto', display: 'block' }} 
-            onError={(e) => {
-              console.error("Failed to load video stream.");
-              e.target.src = "https://placehold.co";
-            }}
-          />
-        ) : (
-          <div style={{ width: '640px', height: '480px', backgroundColor: '#000', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            Stream Paused
-          </div>
-        )}
-      </div>
+     <div className="container">
+        {/* <!-- Left Column: Video --> */}
+        <div className="video-column">
+            <div className="video-wrapper">
+                <RtspCanvas />
+            </div>
+        </div>
 
-      <div style={{ marginTop: '10px' }}>
-        <button onClick={() => setIsPlaying(!isPlaying)}>
-          {isPlaying ? 'Pause Feed' : 'Start Feed'}
-        </button>
-      </div>
+        {/* <!-- Right Column: Details --> */}
+        <div className="details-column">
+            <h1 className="video-title">Video Stream</h1>
+            
+            <div className="video-meta">
+                <span>1 watching now</span>
+                <span>● LIVE</span>
+            </div>
+
+            {/* <!-- New Technical Stats Grid Section --> */}
+            <div className="section-title">Stream Metrics</div>
+            <div className="stats-grid">
+                <div className="stat-card">
+                    <div className="stat-label">Frame Rate</div>
+                    <div className="stat-value">60 FPS</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-label">Resolution</div>
+                    <div className="stat-value">1080p</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-label">Bitrate</div>
+                    <div className    ="stat-value">6.2 Mbps</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-label">Latency</div>
+                    <div className="stat-value">1.4s</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-label">Dropped Frames</div>
+                    <div className="stat-value">0 (0%)</div>
+                </div>
+                <div className="stat-card">
+                    <div className="stat-label">Audio Codec</div>
+                    <div className="stat-value">AAC</div>
+                </div>
+            </div>
+
+            <div className="section-title">Alerts</div>
+            <p className="video-description">
+             
+            </p>
+
+            
+        </div>
     </div>
 
-        <div>
-          canvas1
-          <RtspCanvas />
-        </div>
+
+
+
+
+
+
 
     </>
   )

@@ -39,9 +39,9 @@ const RtspCanvas: React.FC = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>      
-      <canvas ref={canvasRef} style={{ border: '1px solid black', maxWidth: '100%' }} />
-    </div>
+    
+      <canvas ref={canvasRef}/>
+    
   );
 };
 
