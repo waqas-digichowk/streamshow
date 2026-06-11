@@ -49,7 +49,7 @@ app.add_middleware(
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     cap = cv2.VideoCapture(RTSP_URL)
-    fps = cap.get(cv2.CAP_PROP_FPS)
+    count = 0
     try:
         while True:
             success, frame = cap.read()
@@ -58,7 +58,11 @@ async def websocket_endpoint(websocket: WebSocket):
 
             # Encode frame to JPEG
             _, buffer = cv2.imencode('.jpg', frame, [int(cv2.IMWRITE_JPEG_QUALITY), 60])
-            
+            count += 1
+            # if count % 100 == 0:  # Log every 100 frames
+            #     fps=cap.get(cv2.CAP_PROP_FPS)
+            #     print(f"Sending frame {count} of size {buffer.nbytes} bytes at {fps:.2f} FPS")
+
             # Send the frame as binary bytes
             await websocket.send_bytes(buffer.tobytes())
     except WebSocketDisconnect:

@@ -9,6 +9,7 @@ const RtspCanvas: React.FC = () => {
     const ws = new WebSocket('ws://localhost:8000/ws/stream');
     ws.binaryType = 'arraybuffer';
     console.log("WebSocket connection established.");
+
     ws.onmessage = (event) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
@@ -26,7 +27,7 @@ const RtspCanvas: React.FC = () => {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
-        
+
         // Clean up the object URL to prevent memory leaks
         URL.revokeObjectURL(url);
       };
@@ -39,9 +40,10 @@ const RtspCanvas: React.FC = () => {
   }, []);
 
   return (
-    
-      <canvas ref={canvasRef}/>
-    
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+      <canvas ref={canvasRef} style={{ border: '1px solid black', maxWidth: '100%' }} />
+    </div>
+
   );
 };
 

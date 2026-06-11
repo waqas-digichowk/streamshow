@@ -12,11 +12,22 @@ dist
 dist-ssr
 *.local
 
+# Media files
+*.mp4
+*.avi
+*.mkv
+*.flv
+*.mpeg
+
 #Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+trained_models/
+input_data/
+output_data/
 env/
 venv/
 ENV/
